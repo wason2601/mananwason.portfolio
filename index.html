@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BJLVP2WBJ0"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BJLVP2WBJ0');</script>
+
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Manan Wason — Product Manager in Bengaluru. Customer data, personalization and 0→1 products at Indofast Energy, Vista and Verizon.">
 <meta property="og:title" content="Manan Wason · Product Manager">
@@ -1758,5 +1762,23 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
 })();
 </script>
 
+<script>
+/* Analytics: record the clicks that show recruiter interest */
+document.addEventListener("click", function(e){
+  if (typeof gtag !== "function") return;
+  var t = e.target.closest("a,button"); if (!t) return;
+  var where = t.closest(".topbar") ? "nav" : (t.closest("section,.hero") || {}).id || (t.closest(".hero") ? "hero" : "page");
+  var ev = null, p = {placement: where};
+  if (t.classList.contains("cv-btn")) ev = "cv_download";
+  else if (t.id === "copyEmail" || t.id === "copyEmail2") ev = "copy_email";
+  else if (t.href && t.href.indexOf("linkedin.com") > -1) ev = "linkedin_click";
+  else if (t.classList.contains("navcta")) ev = "contact_click";
+  else if (t.classList.contains("book")) { ev = "case_study_open"; p.case_study = t.getAttribute("aria-label"); }
+  else if (t.classList.contains("bucket")) { ev = "toolkit_open"; p.bucket = t.querySelector(".bn") && t.querySelector(".bn").textContent; }
+  else if (t.closest(".roadmap") || t.classList.contains("car-btn")) ev = "launch_carousel_nav";
+  else if (t.href && /^https?:/.test(t.href) && t.host !== location.host) { ev = "outbound_click"; p.url = t.href; }
+  if (ev) gtag("event", ev, p);
+}, true);
+</script>
 </body>
 </html>
