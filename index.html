@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-ej1EjGizKzLMyUEo2mvBZ.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BJLVP2WBJ0"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BJLVP2WBJ0');</script>
@@ -1769,9 +1775,8 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
 </script>
 
 <script>
-/* Analytics: record the clicks that show recruiter interest */
+/* Analytics: record the clicks that show recruiter interest (Google Analytics + Plausible) */
 document.addEventListener("click", function(e){
-  if (typeof gtag !== "function") return;
   var t = e.target.closest("a,button"); if (!t) return;
   var where = t.closest(".topbar") ? "nav" : (t.closest("section,.hero") || {}).id || (t.closest(".hero") ? "hero" : "page");
   var ev = null, p = {placement: where};
@@ -1783,7 +1788,9 @@ document.addEventListener("click", function(e){
   else if (t.classList.contains("bucket")) { ev = "toolkit_open"; p.bucket = t.querySelector(".bn") && t.querySelector(".bn").textContent; }
   else if (t.closest(".roadmap") || t.classList.contains("car-btn")) ev = "launch_carousel_nav";
   else if (t.href && /^https?:/.test(t.href) && t.host !== location.host) { ev = "outbound_click"; p.url = t.href; }
-  if (ev) gtag("event", ev, p);
+  if (!ev) return;
+  if (typeof gtag === "function") gtag("event", ev, p);
+  if (typeof plausible === "function") plausible(ev, {props: p});
 }, true);
 </script>
 </body>
