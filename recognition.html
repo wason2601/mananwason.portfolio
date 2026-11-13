@@ -1108,6 +1108,24 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
           </div>
         </div>
       </article>
+      <article class="flip" id="ship-idreport" tabindex="0" aria-label="Customer identifier usage reporting. Press Enter to flip.">
+        <div class="flip-in">
+          <div class="face front">
+            <svg class="sketch" viewBox="0 0 240 140" role="img" aria-label="Sketch: event and configuration data joined in Snowflake, shown on an identifier usage dashboard"><rect class="sk-f" x="4" y="4" width="232" height="132" rx="8"/><line class="sk-b" x1="4" y1="18" x2="236" y2="18"/><circle class="sk-l" cx="13" cy="11" r="2.5"/><circle class="sk-l" cx="21" cy="11" r="2.5"/><circle class="sk-l" cx="29" cy="11" r="2.5"/><rect class="sk-s" x="12" y="28" width="52" height="30" rx="5"/><text class="sk-t" x="18" y="40">Events</text><rect class="sk-l" x="18" y="46" width="34" height="4" rx="2"/><rect class="sk-s" x="12" y="66" width="52" height="30" rx="5"/><text class="sk-t" x="18" y="78">CDP config</text><rect class="sk-l" x="18" y="84" width="30" height="4" rx="2"/><path class="sk-arrow" d="M66 43 C 80 43, 80 62, 92 62"/><path class="sk-arrow" d="M66 81 C 80 81, 80 62, 92 62"/><ellipse class="sk-a" cx="110" cy="50" rx="17" ry="5"/><path class="sk-a" d="M93 50 v26 a17 5 0 0 0 34 0 v-26"/><ellipse class="sk-a" cx="110" cy="50" rx="17" ry="5"/><text class="sk-t" x="96" y="96">Snowflake</text><path class="sk-arrow" d="M129 62 H146"/><path class="sk-arrowh" d="M142 58 L148 62 L142 66"/><rect class="sk-s" x="150" y="26" width="78" height="102" rx="5"/><text class="sk-t" x="156" y="38">ID usage</text><rect class="sk-l" x="157.0" y="90" width="8" height="20" rx="1.5"/><rect class="sk-l" x="168.5" y="76" width="8" height="34" rx="1.5"/><rect class="sk-l" x="180.0" y="82" width="8" height="28" rx="1.5"/><rect class="sk-l" x="191.5" y="64" width="8" height="46" rx="1.5"/><rect class="sk-l" x="203.0" y="70" width="8" height="40" rx="1.5"/><rect class="sk-af" x="214.5" y="52" width="8" height="58" rx="1.5"/><rect class="sk-pill" x="156" y="114" width="40" height="9" rx="4.5"/><text class="sk-tw2" x="176" y="120.5" text-anchor="middle">100% seen</text></svg>
+            <div class="fmeta"><span class="co sm co-vi" role="img" aria-label="Vista logo"></span></div>
+            <h3>Customer identifier usage reporting</h3>
+            <p class="q">Which customer identifiers actually drive personalization, and where?</p>
+            <span class="hint">Flip for the result ↻</span>
+          </div>
+          <div class="face back" aria-hidden="true">
+            <span class="label">What I shipped</span>
+            <p class="shipped">A reporting pipeline that joins site events with CDP configuration data in Snowflake, surfaced in a Looker dashboard by locale, page and customer phase.</p>
+            <div class="big">100%</div>
+            <div class="biglab">visibility into identifier usage, up from 0%</div>
+            <div class="bfoot"><span class="co sm co-vi" role="img" aria-label="Vista logo"></span><button class="jump2" type="button" data-go="job-vista">See the role ↓</button><span class="hint">↻</span></div>
+          </div>
+        </div>
+      </article>
       <article class="flip" id="ship-pers" tabindex="0" aria-label="Personalization roadmap. Press Enter to flip.">
         <div class="flip-in">
           <div class="face front">
@@ -1833,9 +1851,9 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
     const get = id => document.getElementById("ship-" + id);
     const L = [
       {id:"asset",     co:"ie", tag:"Platform · 0→1",       loc:"Indofast · India",          when:"2026–"},
+      {id:"idreport",  co:"vi", tag:"Data platform",        loc:"Vista · CDP & personalization", when:"2024–26"},
       {id:"templates", co:"vi", tag:"Monetization",         loc:"Vista · global",            when:"2024–26"},
       {id:"panel",     co:"vi", tag:"Conversion",           loc:"Vista · homepage",          when:"2024–26"},
-      {id:"pers",      co:"vi", tag:"Personalization",      loc:"Vista · all channels",      when:"2024–26"},
       {id:"floor",     co:"vz", tag:"Platform · 0→1",      loc:"Verizon · USA, 200+ sites", when:"2019–22"}
     ];
     L.forEach((x,i) => {
@@ -1862,7 +1880,7 @@ footer.site{border-top:1px solid var(--line);padding-block:22px;font-size:13px;c
       track.appendChild(sl);
     });
     const rm = $("#roadmap");
-    rm.innerHTML = L.map((x,i) => `<li><button type="button" class="c-${x.co}" data-i="${i}" aria-label="Launch ${i+1}: ${x.name}"><i></i><span>${({floor:"Floor-plan platform", templates:"Personalized templates", panel:"Homepage panel", pers:"Personalization roadmap", usecase:"Shop by Use Case", asset:"Asset recovery"})[x.id]}</span></button></li>`).join("");
+    rm.innerHTML = L.map((x,i) => `<li><button type="button" class="c-${x.co}" data-i="${i}" aria-label="Launch ${i+1}: ${x.name}"><i></i><span>${({floor:"Floor-plan platform", templates:"Personalized templates", panel:"Homepage panel", pers:"Personalization roadmap", idreport:"Identifier reporting", usecase:"Shop by Use Case", asset:"Asset recovery"})[x.id]}</span></button></li>`).join("");
     const slides = [...track.children], dots = [...rm.querySelectorAll("button")];
     let cur = 0;
     const go = i => { i = (i + L.length) % L.length; track.scrollTo({left: slides[i].offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft || 0), behavior: reduce ? "auto" : "smooth"}); };
